@@ -1,7 +1,7 @@
 Campaign Node JSON IO Functionality
 ===================================
 
-JSON IO is one of the intelligent nodes of Campaigns. It integrates Agile with other applications on the fly. You can GET or POST data with valid REST URL.
+JSON IO is one of the intelligent nodes of Campaigns. You can integrate Agile with other applications on the fly. GET or POST data with valid REST URL endpoints are currently supported.
 
 Adding the JSON IO node
 -----------------------
@@ -10,7 +10,7 @@ Adding the JSON IO node
   
  It consists of three input fields, namely:
 
- - **URL** - It should be valid Rest URL from which you can GET or POST data. URL can have query params as part of it. Dynamic params can be added separately in Params section.
+ - **URL** - It should be a valid REST URL from which you can GET or POST data. URL can have query params as part of it. You can send dynamic params (eg: ?email={{email}}) under Params section.
 
  - **Method type** - GET or POST.
 
@@ -18,14 +18,23 @@ Adding the JSON IO node
 ‘Key-Value’ pairs which are appended as Query Params to URL later. More params can be added using ’Add’ button.    
 At least one Key-Value param should be present. Each param can be edited or deleted. Any Agile Contact Merge Field like {{email}} can be added as Value
 
+
+Output:
+--------
+
+The output from the URL (JSON format) are stored as user parameters and are available in the rest of the workflow. 
+
+For an example response such as {"firstName": "John", "lastName": "Smith"} You can use {{firstName}} in your workflow as merge fields anywhere.
+
+
 Example:
 --------
 
-Using http://openweathermap.org to illustrate JSON IO usage:
+Here is a quick example (weather) to illustrate JSON IO usage:
 
 The following REST URL fetches weather data of London city http://api.openweathermap.org/data/2.5/weather?q=London&lat=42.98&lon=-81.23
 
-Follow 3 simple below steps in JSON IO to get weather data:
+We follow the simple below steps in JSON IO node to get weather data:
 
 - **URL** -  http://api.openweathermap.org/data/2.5/weather (without query params).
 
@@ -53,7 +62,8 @@ Follow 3 simple below steps in JSON IO to get weather data:
     </table>
 
 **Note:**    
-URL with query params is also supported. But at least one param under ‘Params’ is mandatory.
+
+URL with query params is also supported. But at least one param under ‘Params’ is mandatory. For URL which do not take any parameters, you can send a dummy param.
 
 Node Exit paths
 ----------------
@@ -115,7 +125,11 @@ For example, if the response data from the above request is as below, this data 
 
  ![alt text](https://raw.githubusercontent.com/agilecrm/agile-crm-json-io-node/master/Screenshots/jsonio_sendemail.png "Send Email")
 
-We support Mustache templates. You can use Mustache syntax in your email content or other places.     
-Refer - http://mustache.github.io/mustache.5.html
+
+Mustache
+---------
+
+Agile supports advanced Mustache templates. You can use Mustache syntax in your email content or other places.     
+Refer - http://mustache.github.io/mustache.5.html for conditions or loops.
 
 You can test your mustache template code using this tool - http://trymustache.com/
